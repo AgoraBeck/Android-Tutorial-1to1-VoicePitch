@@ -2,8 +2,7 @@
 
 *Read this in other languages: [English](README.en.md)*
 
-1.这个开源示例项目演示了如何快速集成 Agora 视频 SDK，实现1对1视频通话。
-2.增加变声控制条演示 
+这个开源示例项目演示了如何快速集成 Agora 视频 SDK，实现1对1视频通话。
 
 在这个示例项目中包含了以下功能：
 

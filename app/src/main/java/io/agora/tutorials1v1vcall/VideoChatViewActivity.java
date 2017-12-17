@@ -273,8 +273,13 @@ public class VideoChatViewActivity extends AppCompatActivity implements SeekBar.
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         tv1.setText("正在拖动");
-        tv2.setText("当前数值:"  + (float)(progress/100.0));
-        mRtcEngine.setLocalVoicePitch((float)(progress/100.0));
+        if(progress <50) {
+            tv2.setText("当前数值:" + 0.5);
+            mRtcEngine.setLocalVoicePitch((float) (50 / 100.0));
+        }else {
+            tv2.setText("当前数值:" + (float) (progress / 100.0));
+            mRtcEngine.setLocalVoicePitch((float) (progress / 100.0));
+        }
     }
 
     // 开始拖动
