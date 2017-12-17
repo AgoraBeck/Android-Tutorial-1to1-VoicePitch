@@ -64,6 +64,19 @@ public class VideoChatViewActivity extends AppCompatActivity implements SeekBar.
                 }
             });
         }
+
+        @Override
+        public void onAudioVolumeIndication(final  AudioVolumeInfo[] speakers,
+                                             final int totalVolume ){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    audioVolumeIndication(speakers, totalVolume);
+                }
+            });
+    }
+
+
     };
 
     @Override
@@ -216,6 +229,7 @@ public class VideoChatViewActivity extends AppCompatActivity implements SeekBar.
 
     // Tutorial Step 4
     private void joinChannel() {
+        mRtcEngine.enableAudioVolumeIndication(400,3);
         mRtcEngine.joinChannel(null, "yy", "Extra Optional Data", 0); // if you do not specify the uid, we will generate the uid for you
     }
 
@@ -262,6 +276,14 @@ public class VideoChatViewActivity extends AppCompatActivity implements SeekBar.
         }
     }
 
+    private void  audioVolumeIndication(IRtcEngineEventHandler.AudioVolumeInfo[] speakers,
+                                        int totalVolume ){
+        for (IRtcEngineEventHandler.AudioVolumeInfo elem : speakers){
+            Log.d("VolumeIndication", " uid: " +elem.uid + " volume : " + elem.volume);
+        }
+        return;
+    }
+
     private void initViews() {
         panvSB = (SeekBar) findViewById(R.id.audio_effects_pan_value_bar);
         panvSB.setOnSeekBarChangeListener(this);
@@ -269,6 +291,10 @@ public class VideoChatViewActivity extends AppCompatActivity implements SeekBar.
         tv2 = (TextView) findViewById(R.id.id_tv2);
     }
 
+    private void volumeIndication() {
+
+
+    }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
